@@ -14,6 +14,7 @@ public class GameLogiController : MonoBehaviour {
     [Space]
     public float strength = 1;
 
+    public static GameLogiController Instance { get; private set; }
 
     ARRaycastManager raycastManager;
     ARPlaneManager planeManager;
@@ -21,6 +22,16 @@ public class GameLogiController : MonoBehaviour {
 
 
     void Awake() {
+
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+
         raycastManager = GetComponent<ARRaycastManager>();
         planeManager = GetComponent<ARPlaneManager>();
     }
@@ -40,7 +51,7 @@ public class GameLogiController : MonoBehaviour {
                         var hitPose = hitResults[0].pose;
                         spawnedPokemon = Instantiate(pokemon, hitPose.position, hitPose.rotation);
                         AudioManager.Instance.PlayPikaSound();
-                        disablePlaneDetection();
+                        handlePlaneDetection(false);
                     }
                 } else {
                     var spawnPos = cameraTransform.position + cameraTransform.forward * 0.1f;
@@ -52,9 +63,15 @@ public class GameLogiController : MonoBehaviour {
         }
     }
 
-    void disablePlaneDetection() {
-        planeManager.enabled = false;
-        setAllPlanesActive(false);
+    public void resetGameLogic()
+    {
+        spawnedPokemon = null;
+        handlePlaneDetection(true);
+    }
+
+    void handlePlaneDetection(bool activate) {
+        planeManager.enabled = activate;
+        setAllPlanesActive(activate);
     }
 
     void setAllPlanesActive(bool value) {

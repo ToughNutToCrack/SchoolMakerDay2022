@@ -11,14 +11,14 @@ public enum PokeState
 
 public class Pokeball : MonoBehaviour
 {
-    public float captureTime = 3;
-    public AudioClip pokeSound;
+    public float captureTime = 2;
     Animator anim;
     const string ANIMTRIGGER = "Action";
     const string PIKATAG = "Pika";
     PokeState state;
     Rigidbody rb;
     float elapsedTime;
+    GameObject pika;
 
     private void Start()
     {
@@ -40,6 +40,7 @@ public class Pokeball : MonoBehaviour
                 state = PokeState.Full;
                 anim.SetTrigger(ANIMTRIGGER);
                 rb.isKinematic = false;
+                StartCoroutine(DestroyAndNotify());
             }
         }
     }
@@ -52,6 +53,20 @@ public class Pokeball : MonoBehaviour
             rb.isKinematic = true;
             anim.SetTrigger(ANIMTRIGGER);
             AudioManager.Instance.PlayPokeSound();
+            collision.collider.GetComponentInParent<Pikachu>().capture(transform.position);
         }
+    }
+
+    IEnumerator DestroyAndNotify()
+    {
+        float elapsedTime = 0;
+        while (elapsedTime < 2)
+        {
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        GameLogiController.Instance.resetGameLogic();
+        Destroy(gameObject);
+        Destroy(pika.gameObject);
     }
 }
