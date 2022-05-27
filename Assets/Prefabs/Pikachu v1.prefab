@@ -1765,7 +1765,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6516003382560422338}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 2.915}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1790,7 +1790,10 @@ MonoBehaviour:
   smoke: {fileID: 1545632243605530788}
   model: {fileID: 7954731528598735675}
   pikaRenderer: {fileID: 3380233994101045215}
-  speed: 1
+  speed: 0.2
+  vfxSpeed: 1
+  moveSpeed: 1.3
+  isFree: 0
 --- !u!1 &6777107648905849015
 GameObject:
   m_ObjectHideFlags: 0

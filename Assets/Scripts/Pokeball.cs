@@ -20,7 +20,7 @@ public class Pokeball : MonoBehaviour {
     PokeState state;
     Rigidbody rb;
     float elapsedTime;
-    GameObject pika;
+    Pikachu pika;
 
     private void Start() {
         state = PokeState.Idle;
@@ -46,12 +46,17 @@ public class Pokeball : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision) {
         if (collision.collider.CompareTag(PIKATAG) && state == PokeState.Idle) {
-            state = PokeState.Capturing;
-            rb.isKinematic = true;
-            anim.SetTrigger(ANIMTRIGGER);
-            AudioManager.Instance.PlayPokeSound();
-            hitVfx.SetActive(true);
-            collision.collider.GetComponentInParent<Pikachu>().capture(transform.position);
+            pika = collision.collider.GetComponentInParent<Pikachu>();
+            if (pika.isFree)
+            {
+                state = PokeState.Capturing;
+                rb.isKinematic = true;
+                anim.SetTrigger(ANIMTRIGGER);
+                AudioManager.Instance.PlayPokeSound();
+                hitVfx.SetActive(true);
+                pika.capture(transform.position);
+            }
+            
         }
     }
 

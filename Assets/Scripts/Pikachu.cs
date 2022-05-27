@@ -8,12 +8,15 @@ public class Pikachu : MonoBehaviour {
     public GameObject model;
     public Renderer pikaRenderer;
     [Space]
-    public float speed = 1;
+    public float speed = 0.5f;
     public float vfxSpeed = 1;
+    public float moveSpeed = 1;
+    public bool isFree;
     [Space]
     Material[] materials;
 
     void Start() {
+        isFree = true;
         model.SetActive(false);
         smoke.SetActive(true);
         materials = pikaRenderer.materials;
@@ -33,16 +36,16 @@ public class Pikachu : MonoBehaviour {
     }
 
     public void capture(Vector3 pokePos) {
+        isFree = false;
         StartCoroutine(disappear(pokePos));
     }
 
     IEnumerator disappear(Vector3 pokePos) {
-        var direction = pokePos - model.transform.position;
         float vfxColorTransition = 0;
         while (model.transform.localScale.magnitude > 0.05f) {
             model.transform.localScale -= Vector3.one * speed * Time.deltaTime;
-            model.transform.position += direction * speed * Time.deltaTime;
-            vfxColorTransition += speed * Time.deltaTime;
+            model.transform.position = Vector3.Lerp(model.transform.position, pokePos, moveSpeed * Time.deltaTime);
+            vfxColorTransition += vfxSpeed * Time.deltaTime;
             foreach (var m in materials) {
                 m.SetFloat(WEIGHT, vfxColorTransition);
             }
