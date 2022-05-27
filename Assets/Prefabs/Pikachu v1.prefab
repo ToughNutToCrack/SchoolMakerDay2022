@@ -211,10 +211,10 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 49cd075bacd7101449996ee70fa3f6ce, type: 2}
-  - {fileID: 2100000, guid: 6cfc48156c312384bb99172a02b22552, type: 2}
-  - {fileID: 2100000, guid: 0a7f86717f42fec458265f98efbf77c0, type: 2}
-  - {fileID: 2100000, guid: 6bb200b63c69f03449a7637c0c2d5235, type: 2}
+  - {fileID: 2100000, guid: a6084e2fdc900054081abfe90ffb1ffc, type: 2}
+  - {fileID: 2100000, guid: 0a1e8699049f90147babac07a2369530, type: 2}
+  - {fileID: 2100000, guid: bb98a268cae97b14cab6104381d9ad02, type: 2}
+  - {fileID: 2100000, guid: 475f4b5f35edc53439fc12e84df9c8cd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1789,6 +1789,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   smoke: {fileID: 1545632243605530788}
   model: {fileID: 7954731528598735675}
+  pikaRenderer: {fileID: 3380233994101045215}
+  speed: 1
 --- !u!1 &6777107648905849015
 GameObject:
   m_ObjectHideFlags: 0
