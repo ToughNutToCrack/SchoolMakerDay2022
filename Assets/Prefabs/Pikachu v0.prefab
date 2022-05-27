@@ -1652,7 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8886250209856357096}
   m_Layer: 0
-  m_Name: Pikachu
+  m_Name: Pikachu v0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
