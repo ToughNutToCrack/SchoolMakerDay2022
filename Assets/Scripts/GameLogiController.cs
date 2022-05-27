@@ -39,6 +39,7 @@ public class GameLogiController : MonoBehaviour {
                     if (raycastManager.Raycast(touchPos, hitResults, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)) {
                         var hitPose = hitResults[0].pose;
                         spawnedPokemon = Instantiate(pokemon, hitPose.position, hitPose.rotation);
+                        AudioManager.Instance.PlayPikaSound();
                         disablePlaneDetection();
                     }
                 } else {
