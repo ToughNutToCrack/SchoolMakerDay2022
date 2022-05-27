@@ -20,11 +20,11 @@ public class PlaceOnPlane : MonoBehaviour {
         if (Input.touchCount > 0) {
             Touch touch = Input.GetTouch(0);
             if (touch.phase == TouchPhase.Began) {
-                var touchPostion = touch.position;
+                var touchPos = touch.position;
 
                 List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
 
-                if (raycastManager.Raycast(touchPostion, hitResults, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)) {
+                if (raycastManager.Raycast(touchPos, hitResults, UnityEngine.XR.ARSubsystems.TrackableType.PlaneWithinPolygon)) {
                     var hitPose = hitResults[0].pose;
                     Instantiate(objectToSpawn, hitPose.position, hitPose.rotation);
                 }
